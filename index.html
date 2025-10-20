@@ -7,106 +7,51 @@
   <meta name="description" content="Lone Rock Ranch private hub to connect family members—directory, calendar, announcements, and more." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --bg: #1a0d0a;          /* deep rustic red background */
-      --card: #2b1510;        /* darker red-brown card background */
-      --ink: #f8f8f8;         /* light text */
-      --accent: #b94e2c;      /* warm red accent */
-      --muted: #c9b6ac;       /* soft tan text */
+      --bg: #fdf2f2;          /* very light rose */
+      --card: #ffffff;        /* white */
+      --ink: #2b0d0b;         /* near-black warm */
+      --muted: #7c3f3a;       /* muted warm */
+      --brand: #7b241c;       /* dark ranch red */
+      --brand-2: #a93226;     /* lighter ranch red */
+      --ring: rgba(123, 36, 28, 0.35);
+      --border: #f1d4d4;      /* pale red border */
     }
 
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: "Inter", sans-serif;
-      background: var(--bg);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       color: var(--ink);
+      background: radial-gradient(1000px 600px at 80% -100px, rgba(123,36,28,.06), transparent 60%), var(--bg);
     }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    header {
-      background: var(--accent);
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: 1.8rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
+    /* Layout */
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    header { position: sticky; top: 0; z-index: 40; background: rgba(253,242,242,.85); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 24px; }
+    .nav a { font-weight: 600; color: var(--ink); padding: 8px 10px; border-radius: 8px; }
+    .nav a.active, .nav a:hover { background: #fbeaea; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; }
+    .brand-badge { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display: grid; place-items: center; color: white; font-weight: 800; box-shadow: 0 6px 20px rgba(123,36,28,.25); }
 
-    main {
-      max-width: 1100px;
-      margin: 2rem auto;
-      background: var(--card);
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    }
+    /* Banner */
+    .banner { background: linear-gradient(180deg, var(--brand), var(--brand-2)); color: #fff; }
+    .banner .container { padding: 28px 24px; }
+    .banner h1 { font-size: clamp(28px, 4vw, 44px); margin: 0 0 8px; line-height: 1.1; }
+    .banner p { margin: 0 0 16px; color: rgba(255,255,255,.9); }
+    .banner .btn.primary { background: #fff; color: var(--brand); box-shadow: 0 10px 24px rgba(0,0,0,.15); }
+    .banner .btn { border-color: rgba(255,255,255,.35); }
 
-    h2 {
-      border-left: 4px solid var(--accent);
-      padding-left: 0.6rem;
-      color: var(--muted);
-    }
+    /* Content cards */
+    .hero { padding: 24px; }
+    .hero-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 28px; box-shadow: 0 10px 30px rgba(2, 6, 23, .05); }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border); background: white; font-weight: 600; cursor: pointer; transition: transform .04s ease; }
+    .btn:active { transform: translateY(1px); }
+    .btn.primary { background: var(--brand); color: white; border-color: transparent;
 
-    .calendar-section {
-      margin-top: 3rem;
-    }
-
-    .calendar-embed {
-      position: relative;
-      width: 100%;
-      padding-bottom: 75vh; /* sets height ratio */
-    }
-
-    .calendar-embed iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    @media (max-width: 640px) {
-      .calendar-embed { padding-bottom: 90vh; }
-    }
-
-    footer {
-      text-align: center;
-      margin: 3rem 0 1rem 0;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    Welcome to Lone Rock Ranch — Family Hub
-  </header>
-
-  <main>
-    <h2>About This Hub</h2>
-    <p>
-      This site connects all family members for announcements, events, and Ranch projects.
-      Use the calendar below to stay up to date with gatherings, work weekends, and celebrations.
-    </p>
-
-    <section id="calendar" class="calendar-section">
-      <h2>Family Calendar</h2>
-      <div class="calendar-embed">
-        <iframe
-          src="https://calendar.google.com/calendar/embed?src=nq76a4kiv5v65vetalp5qbjmtv0%40group.calendar.google.com&mode=MONTH&showTitle=0&showCalendars=0&showTz=0&showTabs=1&showPrint=0&wkst=1&ctz=America%2FLos_Angeles"
-          frameborder="0"
-          scrolling="no"
-          aria-label="Lone Rock Ranch Calendar">
-        </iframe>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 Lone Rock Ranch Family Hub
-  </footer>
-</body>
-</html>
